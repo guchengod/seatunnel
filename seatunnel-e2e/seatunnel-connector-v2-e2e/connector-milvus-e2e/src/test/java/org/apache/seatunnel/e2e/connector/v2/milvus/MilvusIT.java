@@ -431,16 +431,16 @@ public class MilvusIT extends TestSuiteBase implements TestResource {
                                 .build());
 
         DescribeCollectionResponse data = describeCollectionResponseR.getData();
-        List<String> fileds =
+        List<String> fields =
                 data.getSchema().getFieldsList().stream()
                         .map(FieldSchema::getName)
                         .collect(Collectors.toList());
-        Assertions.assertTrue(fileds.contains(ID_FIELD));
-        Assertions.assertTrue(fileds.contains(VECTOR_FIELD));
-        Assertions.assertTrue(fileds.contains(VECTOR_FIELD2));
-        Assertions.assertTrue(fileds.contains(VECTOR_FIELD3));
-        Assertions.assertTrue(fileds.contains(VECTOR_FIELD4));
-        Assertions.assertTrue(fileds.contains(TITLE_FIELD));
+        Assertions.assertTrue(fields.contains(ID_FIELD));
+        Assertions.assertTrue(fields.contains(VECTOR_FIELD));
+        Assertions.assertTrue(fields.contains(VECTOR_FIELD2));
+        Assertions.assertTrue(fields.contains(VECTOR_FIELD3));
+        Assertions.assertTrue(fields.contains(VECTOR_FIELD4));
+        Assertions.assertTrue(fields.contains(TITLE_FIELD));
     }
 
     @TestTemplate
@@ -468,16 +468,16 @@ public class MilvusIT extends TestSuiteBase implements TestResource {
                                 .build());
 
         DescribeCollectionResponse data = describeCollectionResponseR.getData();
-        List<String> fileds =
+        List<String> fields =
                 data.getSchema().getFieldsList().stream()
                         .map(FieldSchema::getName)
                         .collect(Collectors.toList());
-        Assertions.assertTrue(fileds.contains(ID_FIELD));
-        Assertions.assertTrue(fileds.contains(VECTOR_FIELD));
-        Assertions.assertTrue(fileds.contains(VECTOR_FIELD2));
-        Assertions.assertTrue(fileds.contains(VECTOR_FIELD3));
-        Assertions.assertTrue(fileds.contains(VECTOR_FIELD4));
-        Assertions.assertTrue(fileds.contains(TITLE_FIELD));
+        Assertions.assertTrue(fields.contains(ID_FIELD));
+        Assertions.assertTrue(fields.contains(VECTOR_FIELD));
+        Assertions.assertTrue(fields.contains(VECTOR_FIELD2));
+        Assertions.assertTrue(fields.contains(VECTOR_FIELD3));
+        Assertions.assertTrue(fields.contains(VECTOR_FIELD4));
+        Assertions.assertTrue(fields.contains(TITLE_FIELD));
     }
 
     @TestTemplate
@@ -503,13 +503,13 @@ public class MilvusIT extends TestSuiteBase implements TestResource {
                                 .build());
 
         DescribeCollectionResponse data = describeCollectionResponseR.getData();
-        List<String> fileds =
+        List<String> fields =
                 data.getSchema().getFieldsList().stream()
                         .map(FieldSchema::getName)
                         .collect(Collectors.toList());
-        Assertions.assertTrue(fileds.contains(ID_FIELD));
-        Assertions.assertTrue(fileds.contains(VECTOR_FIELD));
-        Assertions.assertTrue(fileds.contains(TITLE_FIELD));
+        Assertions.assertTrue(fields.contains(ID_FIELD));
+        Assertions.assertTrue(fields.contains(VECTOR_FIELD));
+        Assertions.assertTrue(fields.contains(TITLE_FIELD));
     }
 
     @TestTemplate
@@ -536,17 +536,17 @@ public class MilvusIT extends TestSuiteBase implements TestResource {
                                 .build());
 
         DescribeCollectionResponse data = describeCollectionResponseR.getData();
-        List<String> fileds =
+        List<String> fields =
                 data.getSchema().getFieldsList().stream()
                         .map(FieldSchema::getName)
                         .collect(Collectors.toList());
 
         // assert table fields
-        Assertions.assertTrue(fileds.contains(ID_FIELD));
-        Assertions.assertTrue(fileds.contains("book_intro_1"));
-        Assertions.assertTrue(fileds.contains("book_intro_2"));
-        Assertions.assertTrue(fileds.contains("book_intro_3"));
-        Assertions.assertTrue(fileds.contains("book_intro_4"));
+        Assertions.assertTrue(fields.contains(ID_FIELD));
+        Assertions.assertTrue(fields.contains("book_intro_1"));
+        Assertions.assertTrue(fields.contains("book_intro_2"));
+        Assertions.assertTrue(fields.contains("book_intro_3"));
+        Assertions.assertTrue(fields.contains("book_intro_4"));
     }
 
     @TestTemplate
