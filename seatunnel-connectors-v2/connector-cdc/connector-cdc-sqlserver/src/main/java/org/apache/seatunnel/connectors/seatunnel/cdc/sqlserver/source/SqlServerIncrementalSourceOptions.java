@@ -15,42 +15,37 @@
  * limitations under the License.
  */
 
-package org.apache.seatunnel.connectors.seatunnel.cdc.mysql.source;
+package org.apache.seatunnel.connectors.seatunnel.cdc.sqlserver.source;
 
 import org.apache.seatunnel.api.configuration.Options;
 import org.apache.seatunnel.api.configuration.SingleChoiceOption;
-import org.apache.seatunnel.connectors.cdc.base.option.SourceOptions;
+import org.apache.seatunnel.connectors.cdc.base.option.JdbcSourceOptions;
 import org.apache.seatunnel.connectors.cdc.base.option.StartupMode;
 import org.apache.seatunnel.connectors.cdc.base.option.StopMode;
 
 import java.util.Arrays;
 
-public class MySqlSourceOptions {
+public class SqlServerIncrementalSourceOptions extends JdbcSourceOptions {
     public static final SingleChoiceOption<StartupMode> STARTUP_MODE =
             (SingleChoiceOption)
-                    Options.key(SourceOptions.STARTUP_MODE_KEY)
+                    Options.key("startup.mode")
                             .singleChoice(
                                     StartupMode.class,
                                     Arrays.asList(
                                             StartupMode.INITIAL,
                                             StartupMode.EARLIEST,
-                                            StartupMode.LATEST,
-                                            StartupMode.SPECIFIC,
-                                            StartupMode.TIMESTAMP))
+                                            StartupMode.LATEST))
                             .defaultValue(StartupMode.INITIAL)
                             .withDescription(
                                     "Optional startup mode for CDC source, valid enumerations are "
-                                            + "\"initial\", \"earliest\", \"latest\" , \"specific\" or \"timestamp\"");
+                                            + "\"initial\", \"earliest\", \"latest\", \"timestamp\"\n or \"specific\"");
 
     public static final SingleChoiceOption<StopMode> STOP_MODE =
             (SingleChoiceOption)
-                    Options.key(SourceOptions.STOP_MODE_KEY)
-                            .singleChoice(
-                                    StopMode.class,
-                                    Arrays.asList(
-                                            StopMode.LATEST, StopMode.SPECIFIC, StopMode.NEVER))
+                    Options.key("stop.mode")
+                            .singleChoice(StopMode.class, Arrays.asList(StopMode.NEVER))
                             .defaultValue(StopMode.NEVER)
                             .withDescription(
                                     "Optional stop mode for CDC source, valid enumerations are "
-                                            + "\"never\", \"latest\" or \"specific\"");
+                                            + "\"never\", \"latest\", \"timestamp\"\n or \"specific\"");
 }

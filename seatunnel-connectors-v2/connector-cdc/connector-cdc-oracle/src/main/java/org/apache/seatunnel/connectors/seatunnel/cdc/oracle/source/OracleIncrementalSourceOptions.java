@@ -15,25 +15,26 @@
  * limitations under the License.
  */
 
-package org.apache.seatunnel.connectors.seatunnel.cdc.sqlserver.source;
+package org.apache.seatunnel.connectors.seatunnel.cdc.oracle.source;
 
+import org.apache.seatunnel.api.configuration.Option;
 import org.apache.seatunnel.api.configuration.Options;
 import org.apache.seatunnel.api.configuration.SingleChoiceOption;
+import org.apache.seatunnel.connectors.cdc.base.option.JdbcSourceOptions;
+import org.apache.seatunnel.connectors.cdc.base.option.SourceOptions;
 import org.apache.seatunnel.connectors.cdc.base.option.StartupMode;
 import org.apache.seatunnel.connectors.cdc.base.option.StopMode;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class SqlServerSourceOptions {
+public class OracleIncrementalSourceOptions extends JdbcSourceOptions {
     public static final SingleChoiceOption<StartupMode> STARTUP_MODE =
             (SingleChoiceOption)
-                    Options.key("startup.mode")
+                    Options.key(SourceOptions.STARTUP_MODE_KEY)
                             .singleChoice(
                                     StartupMode.class,
-                                    Arrays.asList(
-                                            StartupMode.INITIAL,
-                                            StartupMode.EARLIEST,
-                                            StartupMode.LATEST))
+                                    Arrays.asList(StartupMode.INITIAL, StartupMode.LATEST))
                             .defaultValue(StartupMode.INITIAL)
                             .withDescription(
                                     "Optional startup mode for CDC source, valid enumerations are "
@@ -41,10 +42,28 @@ public class SqlServerSourceOptions {
 
     public static final SingleChoiceOption<StopMode> STOP_MODE =
             (SingleChoiceOption)
-                    Options.key("stop.mode")
+                    Options.key(SourceOptions.STOP_MODE_KEY)
                             .singleChoice(StopMode.class, Arrays.asList(StopMode.NEVER))
                             .defaultValue(StopMode.NEVER)
                             .withDescription(
                                     "Optional stop mode for CDC source, valid enumerations are "
                                             + "\"never\", \"latest\", \"timestamp\"\n or \"specific\"");
+
+    public static final Option<List<String>> SCHEMA_NAMES =
+            Options.key("schema-names")
+                    .listType()
+                    .noDefaultValue()
+                    .withDescription("Schema name of the database to monitor.");
+
+    public static final Option<Boolean> USE_SELECT_COUNT =
+            Options.key("use_select_count")
+                    .booleanType()
+                    .defaultValue(false)
+                    .withDescription("Use select count for table count in full stage");
+
+    public static final Option<Boolean> SKIP_ANALYZE =
+            Options.key("skip_analyze")
+                    .booleanType()
+                    .defaultValue(false)
+                    .withDescription("Skip the analysis of table count in full stage");
 }
