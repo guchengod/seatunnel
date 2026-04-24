@@ -15,19 +15,34 @@
 # limitations under the License.
 #
 
-tables_configs = [
-    {
-        schema {
-            table = "db.table1"
-            fields {
-                id = int
-                name = string
-            }
-        }
-    },
-    {
-        schema {
-            metadata_table_id = "test_catalog.test_schema.table2"
-        }
-    }
-]
+seatunnel:
+  engine:
+    history-job-expire-minutes: 1
+    backup-count: 2
+    queue-type: blockingqueue
+    print-execution-info-interval: 10
+    classloader-cache-mode: false
+    slot-service:
+      dynamic-slot: true
+    checkpoint:
+      interval: 300000
+      timeout: 100000
+      storage:
+        type: localfile
+        max-retained: 3
+        plugin-config:
+          namespace: /tmp/seatunnel/checkpoint_snapshot/
+    http:
+        enable-http: true
+        port: 8080
+    telemetry:
+      metric:
+         enabled: false
+      logs:
+         scheduled-deletion-enable: false
+    metadata:
+      enabled: true
+      kind: gravitino
+      gravitino:
+        uri: http://gravitino:8090
+        metalake: test_metalake
