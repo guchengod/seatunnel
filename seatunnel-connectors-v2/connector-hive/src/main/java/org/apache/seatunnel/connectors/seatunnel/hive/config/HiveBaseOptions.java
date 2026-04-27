@@ -23,33 +23,19 @@ import org.apache.seatunnel.api.configuration.Options;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Hive connector options (single source of truth). */
-public class HiveConfig {
+public class HiveBaseOptions {
+
     public static final Option<String> TABLE_NAME =
             Options.key("table_name")
                     .stringType()
                     .noDefaultValue()
                     .withDescription("Hive table name");
 
-    public static final Option<Boolean> USE_REGEX =
-            Options.key("use_regex")
-                    .booleanType()
-                    .defaultValue(false)
-                    .withDescription(
-                            "Use regular expression for `table_name` matching. "
-                                    + "When set to true, the `table_name` will be treated as a regex pattern and can match multiple tables.");
     public static final Option<String> METASTORE_URI =
             Options.key("metastore_uri")
                     .stringType()
                     .noDefaultValue()
                     .withDescription("Hive metastore uri");
-
-    public static final Option<Boolean> ABORT_DROP_PARTITION_METADATA =
-            Options.key("abort_drop_partition_metadata")
-                    .booleanType()
-                    .defaultValue(false)
-                    .withDescription(
-                            "Flag to decide whether to drop partition metadata from Hive Metastore during an abort operation. Note: this only affects the metadata in the metastore, the data in the partition will always be deleted(data generated during the synchronization process).");
 
     public static final Option<String> HIVE_SITE_PATH =
             Options.key("hive_site_path")
@@ -69,4 +55,35 @@ public class HiveConfig {
                     .noDefaultValue()
                     .withDescription(
                             "The specified loading path for the 'core-site.xml', 'hdfs-site.xml' files");
+
+    public static final Option<String> HDFS_SITE_PATH =
+            Options.key("hdfs_site_path")
+                    .stringType()
+                    .noDefaultValue()
+                    .withDescription("The path of hdfs-site.xml");
+
+    public static final Option<String> KERBEROS_PRINCIPAL =
+            Options.key("kerberos_principal")
+                    .stringType()
+                    .noDefaultValue()
+                    .withDescription("When use kerberos, we should set kerberos user principal");
+
+    public static final Option<String> KERBEROS_KEYTAB_PATH =
+            Options.key("kerberos_keytab_path")
+                    .stringType()
+                    .noDefaultValue()
+                    .withDescription("When using kerberos, We should specify the keytab path");
+
+    public static final Option<String> REMOTE_USER =
+            Options.key("remote_user")
+                    .stringType()
+                    .noDefaultValue()
+                    .withDescription("The remote user name of hdfs");
+
+    public static final Option<String> KRB5_PATH =
+            Options.key("krb5_path")
+                    .stringType()
+                    .defaultValue("/etc/krb5.conf")
+                    .withDescription(
+                            "When use kerberos, we should set krb5 path file path such as '/seatunnel/krb5.conf' or use the default path '/etc/krb5.conf'");
 }
