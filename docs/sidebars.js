@@ -300,6 +300,7 @@ const sidebars = {
                             "items": [
                                 "engines/zeta/rest-api-v1",
                                 "engines/zeta/rest-api-v2",
+                                "engines/zeta/rest-api-job-lifecycle",
                                 "engines/zeta/security",
                                 "engines/zeta/python-sdk"
                             ]
