@@ -139,7 +139,9 @@ const sidebars = {
             "label": "Connectors",
             "items": [
                 "connectors/connector-isolated-dependency",
+                "connectors/connector-faq",
                 "connectors/cdc-production-cookbook",
+                "connectors/connector-faq",
                 {
                     "type": "category",
                     "label": "Source",
